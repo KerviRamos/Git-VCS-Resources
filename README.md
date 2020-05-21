@@ -1,7 +1,7 @@
-# GIT - Version Control System 
+# GIT - Version Control System
 Git is a "content addressable filesystem" with a version control interface. Git is primarily known for allowing its user to collaborate in large projects and keep track of any files. This page will walk through the GIT's data model and summarize the commands available in git.
 
-### Summary of resources 
+### Summary of resources
 The following resources can be found in this repository folder structure
 
     GIT-VCS-Resources/
@@ -15,10 +15,28 @@ The following resources can be found in this repository folder structure
 
 
 ## Git Data Model - Content-Addressable Filesystem Structure
-How does the "content addressable filesystem works or what does it even mean? 
+How does the "content addressable filesystem works or what does it even mean?
 At its core has a unique way it stores data. Git stores data in a key-value format.
 
-(data model will be explain here - UNDER DEVELOPMENT)
+(data model will be explain here - UNDER DEVELOPMENT 👇🏼)
+
+How does the "unique key" gets generated?
+
+Unique key = SHA1 hash value - 40 character checksum hash
+
+Blod Object:
+* Content = "What is your purpose? What are you here todo?"
+* header = "blob#{content.length}\0"
+* Store = header + content
+* SHA1 = Digest::SHA1.hexdigest(Store)
+
+<img src="png/diagramUniqueKey.png">
+
+Objects 
+<img src="png/objects.png">
+
+
+(data model will be explain here - UNDER DEVELOPMENT 👆🏼)
 
 ## Git Commands - Version Control Interface
 
@@ -57,7 +75,7 @@ At its core has a unique way it stores data. Git stores data in a key-value form
 
 * `git tag <tagName>` creates a lighweight tag reference
 * `git tag -a <tagName> -m “message”` creates an annotated tag object
-* `git tag [-l or —list]`  list all available tags 
+* `git tag [-l or —list]`  list all available tags
 * `git show <tagName>` shows extra tag information
 * `git push origin <tagName> or —tags` uploads the tags to your remote repo
 * `git tag -d <tagName>` deletes a tag on your local repository
