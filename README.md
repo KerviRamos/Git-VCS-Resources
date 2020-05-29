@@ -32,7 +32,7 @@ Blod Object:
 
 <img src="png/diagramUniqueKey.png">
 
-Objects 
+Objects
 <img src="png/objects.png">
 
 
@@ -81,7 +81,22 @@ Objects
 * `git tag -d <tagName>` deletes a tag on your local repository
 
 #### Branching
-(UNDER DEVELOPMENT)
+
+* `git branch <branchName>` creates a new branch (or new pointer that allows you to move around)
+(The "HEAD" pointer indicates the branch you are currently on)
+* `git checkout <branchName> ` Switch to other branches available in your repo (Noticed the location of the HEAD pointer)
+* `git checkout -b <branchName>` creates and switches to the branch you specified in the command
+* `git merge <BranchwithFixes>` merges the changes from the "BranchwithFixes" to the branch you would like to update (ex: "master" branch)
+* `git branch -d <branchName>` deletes the branch (You are responsible to delete branches that have been merged to master and are not longer need it) -D option forces deleting a branch that has not been merged yet
+* `git mergetool` graphical tool to resolve merge conflicts (primarily available in MacOS)
+* `git branch` list all the existing branches in your repository (the `*` indicates the branch you are currently on)
+* `git branch -v` list all existing branch with last commit on each branch
+* `git branch --merged or --no-merged` filters for branche that meet the option criteria
+* `git branch -vv` shows the tracking branches
+* `git push origin --delete <remoteBranchName>` deletes a remote branch
+* `git rebase <ToBranchName>` replays changes target branch from the branch you are currently on. Rebase is the best approach for contributing to other's people project, since its features maintains a clean linear commit history
+* `git rebase --onto <Master> <topicoNE> <topicTwo>` rebasing the topicTwo branch to the Master branch
+* `git pull --rebase` Attempts to fix rebases that other people have based their work on
 
 #### Advanced Tools In GIT
 (UNDER DEVELOPMENT)
