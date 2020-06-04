@@ -1,5 +1,5 @@
 # GIT - Version Control System
-Git is a "content addressable filesystem" with a version control interface. Git is primarily known for allowing its users to collaborate in large projects and keep track of any files. This page will walk through the GIT's data model and summarize the commands available in git.
+Git is a "content addressable filesystem" with a version control interface. Git is primarily known for allowing its users to collaborate in large projects and keep track of any files. This page will walk through the Git's data model and summarize the commands available in git.
 
 ### Summary of resources
 The following resources can be found in this repository folder structure
@@ -27,7 +27,7 @@ In order to understand how the "git" data model works, we must dive into the ".g
   - index - Stores all of the staging information
   - object/ - the object database stores all content for the .git database
 
-The figure below summarizes the git files created in the directory we are interested in tracking our changes.
+The figure below summarizes the Git files created in the directory we are interested in tracking our changes.
 
 <p>
   <img src="png/dataModel.png">
@@ -36,7 +36,7 @@ The figure below summarizes the git files created in the directory we are intere
 The main files responsible for describing "git's" data model are the HEAD, refs/, index, and object/. In this section, the team explains git's data storage and model.
 
 ### Objects/
-Git stores its data in a key-value data struture,and it's saved in the objects directory. Every time the user gives git a piece information to be tracked or version-control, git generates a unique key value called the "SHA1-HASH". The "SHA1-HASH" key is a unique 40 character checksum hash that gets store in the objects directory. The image below shows a high level flow of object storage in a key-value data format.
+Git stores its data in a key-value data struture, and it's saved in the objects directory. Every time the user gives git a piece information to be tracked or version-control, git generates a unique key value called the "SHA1-HASH". The "SHA1-HASH" key is a unique 40 character checksum hash that gets store in the objects directory. The image below shows a high level flow of object storage in a key-value data format.
 
 <p align="center">
   <img src="png/UniqueKey.png" width = 600>
