@@ -15,28 +15,51 @@ The following resources can be found in this repository folder structure
 
 
 ## Git Data Model - Content-Addressable Filesystem Structure
-How does the "content addressable filesystem works or what does it even mean?
-At its core has a unique way it stores data. Git stores data in a key-value format.
 
-(data model will be explain here - UNDER DEVELOPMENT 👇🏼)
+In order to understand how the "git" data model works, we must dive into the ".git" file directory. Everytime, we initialized a "git" repository using the porcelain command `git init`, "git" automatically creates a hidden directory called ".git". The ".git" directory and sub-directories are responsible for storing and manipulating the data that lives this directory. The ".git" database typically has the following sub-directories;
 
-How does the "unique key" gets generated?
+  - description - file used by the GitWeb program
+  - config - project specific configuration options
+  - info/ - stores the .gitignore patterns
+  - hooks - client and server side hook scripts used for automation
+  - HEAD - points to the ref pointer (branch) you are currently on
+  - refs/ - stores a pointer into commit objects, which makes the commit object easily accessable.
+  - index - Stores all of the staging information
+  - object/ - the object database stores all content for the .git database
 
-Unique key = SHA1 hash value - 40 character checksum hash
+The figure below summarizes the git files created in the directory we are interested in tracking our changes.
 
-Blod Object:
-* Content = "What is your purpose? What are you here todo?"
-* header = "blob#{content.length}\0"
-* Store = header + content
-* SHA1 = Digest::SHA1.hexdigest(Store)
+<p>
+  <img src="png/dataModel.png">
+</p>
 
-<img src="png/diagramUniqueKey.png">
+The main files responsible for describing "git's" data model are the HEAD, refs/, index, and object/. In this section, the team explains git's data storage and model.
 
-Objects
-<img src="png/objects.png">
+### Objects/
+Git stores its data in a key-value data struture,and it's saved in the objects directory. Everytime, the user gives git a piece information to be tracked or version control, git generates a unique key value called the "SHA1-HASH". The "SHA1-HASH" key is a unique 40 character checksum hash that gets store in the objects directory. The image below shows a high level flow of object storage in a key-value data format.
 
+<p align="center">
+  <img src="png/UniqueKey.png" width = 600>
+<p/>
 
-(data model will be explain here - UNDER DEVELOPMENT 👆🏼)
+If would like further you understanding on how SHA1 hash get generated see the [Object Storage section](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects).
+
+Git stores three main objects in order to recall a snapshot of your file system at any point in time. These three objects, blob, tree and commit objects and such of objects are outlined in the image below.
+
+<p align="center">
+  <img src="png/objects.png" width = 500>
+</p>
+
+The "blob" object is responsible for storaging the content present in the directory. The blod object is made up of a SHA1 hash key that stores the information present inside a file or files. A "tree" object allows git to store the filename of the content and also allows the user to store a group of files together. "Tree" objects are created from "blob" objects. In the same way content is stored in a file. The "commit" object references the "tree" object and the associated blob objects. The "commit" object allows users to append additional information about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. The commit object allows users to recall a snapshot throught a single object,"commit" object, insted of the tree and blob objects.
+
+### refs/
+The git reference directory stores the entire "commit" object history. Instead of remembering the SHA-1 value to display the commit object history, the refs/head file is used to reference the objects history.
+
+### HEAD
+The "HEAD" file is a symbolic reference to the branch reference you are currently on. The HEAD is an indicator of where you are actively looking from.
+
+### index
+The index file contains all the tree objects staged in the file directory. Whenever the user makes a commit, git gathers the staged information (tree objects < blob object) saved in the index file.
 
 ## Git Commands - Version Control Interface
 
@@ -99,7 +122,7 @@ Objects
 * `git pull --rebase` Attempts to fix rebases that other people have based their work on
 
 #### Advanced Tools In GIT
-(UNDER DEVELOPMENT)
+(UNDER DEVELOPMENT - To be updated soon @KerviRamos)
 
 ## REFERENCES
 1. [Pro Git by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2) Pro Git contains all the information you need to learn Git. A lot of the material derived in this repository comes from reading Pro Git and my personal experience using git.
