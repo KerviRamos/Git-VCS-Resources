@@ -1,5 +1,5 @@
 # GIT - Version Control System
-Git is a "content addressable filesystem" with a version control interface. Git is primarily known for allowing its users to collaborate in large projects and keep track of any files. This page will walk through the Git's data model and summarize the commands available in git.
+Git is a "content addressable filesystem" with a version control interface. Primarily, Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. The sections below outlines all the files available in this repository, attempt to explain Git's data model, and list git's frequently used commands for version management.
 
 ### Summary of resources
 The following resources can be found in this repository folder structure
@@ -16,7 +16,7 @@ The following resources can be found in this repository folder structure
 
 ## Git Data Model - Content-Addressable Filesystem Structure
 
-In order to understand how the "git" data model works, we must dive into the ".git" file directory. Every time we initialize a "git" repository using the porcelain command `git init`, "git" automatically creates a hidden directory called ".git". The ".git" directory and sub-directories are responsible for storing and manipulating the data that lives this directory. The ".git" database typically has the following sub-directories;
+In order to understand how the "git" data model works, we must dive into the ".git" file directory. ".git" is a database responsible for storaging and tracking changes to the files under version control. Every time we initialize a "git" repository using the porcelain command `git init`, Git automatically creates a hidden directory called ".git". Inside the ".git", we can find the object and refs directories and the HEAD and index files. These four files form the core of  git's version control capabilities. Below, we ouline the sub-directories present in the ".git" directory and their definition.
 
   - description - file used by the GitWeb program
   - config - project specific configuration options
@@ -36,34 +36,34 @@ The figure below summarizes the Git files created in the directory we are intere
 The main files responsible for describing "git's" data model are the HEAD, refs/, index, and object/. In this section, the team explains git's data storage and model.
 
 ### Objects/
-Git stores its data in a key-value data struture, and it's saved in the objects directory. Every time the user gives git a piece information to be tracked or version-control, git generates a unique key value called the "SHA1-HASH". The "SHA1-HASH" key is a unique 40 character checksum hash that gets store in the objects directory. The image below shows a high level flow of object storage in a key-value data format.
+Git stores its data in a key-value data struture, and it's saved in the objects directory. Every time the user gives git a piece information to be tracked, git generates a unique key value called the "SHA1-HASH". The "SHA1-HASH" key is a unique 40 character checksum hash that gets store in the objects directory. The image below shows a schematic of the key-value storage at a high level. For more information regarding the creation of key values and the storage of git object refer to [Git Pro Manual - Object](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) 
 
 <p align="center">
   <img src="png/UniqueKey.png" width = 600>
 <p/>
 
-If would like to further your understanding on how SHA1 hash get generated see the [Object Storage section](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects).
+If would like to further understand how the SHA1 hash get generated, see the [Object Storage section](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects).
 
-Git stores three main objects in order to recall a snapshot of your file system at any point in time. These three objects, blob, tree and commit objects and such of objects are outlined in the image below.
+Git stores three main objects in order to recall a snapshot form your file system at any point in time. These three objects are the blob, tree, and commit objects and such of objects are outlined in the image below.
 
 <p align="center">
   <img src="png/objects.png" width = 500>
 </p>
 
-The "blob" object is responsible for storaging the content present in the directory. The blob object is made up of a SHA1 hash key that stores the information present inside a file or files. A "tree" object allows git to store the filename of the content and also allows the user to store a group of files together. "Tree" objects are created from "blob" objects. In the same way content is stored in a file. The "commit" object references the "tree" object and the associated blob objects. The "commit" object allows users to append additional information about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. The commit object allows users to recall a snapshot throught a single object, "commit" object, instead of the tree and blob objects.
+The "blob" object is responsible for storaging the content present inside the files only. The blob object will consist of the created content inside the file(s) and its associated SHA1 hash key. The blob oject does not store the file name where the content live, instead the tree object is responsible for storaging the file name associted with the content. A "tree" object allows git to store the filename of the content, and also allows the user to store a group of files together. "Tree" objects are created from "blob" objects. In the same way content is stored in a file. The "commit" object references the "tree" object and the associated blob objects. The "commit" object allows users to append additional information about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. The commit object allows users to recall a snapshot throught a single object, "commit" object, instead of remembering the SHA1 hassh value for the tree and blob objects to recall the snapshot.
 
 ### refs/
-The git reference directory stores the entire "commit" object history. Instead of remembering the SHA-1 value to display the commit object history, the refs/head file is used to reference the objects history.
+The git reference directory stores the entire "commit" object history. Instead of remembering the SHA-1 value to display the commit object history, the refs/head file is used to reference the objects history using a reference names such as branches.
 
 ### HEAD
-The "HEAD" file is a symbolic reference to the branch reference you are currently on. The HEAD is an indicator of where you are actively looking from.
+The "HEAD" file is a symbolic reference that allows you know your current location along the git commit history. The HEAD looks from the current location back to previous commits along the git commit history. 
 
 ### index
-The index file contains all the tree objects staged in the file directory. Whenever the user makes a commit, git gathers the staged information (tree objects < blob object) saved in the index file.
+The index file warehouse all of the staged files (or tree objects) ready to be included in the next commit call. Whenever the user makes a commit, git gathers the staged information (tree objects < blob object) and save them in index file.
 
 ## Git Commands - Version Control Interface
 
-#### Basics
+### Basics
 
 * `git init` initializes the .git database
 * `git clone <url>` downloads a remote repository to your local working space
@@ -77,7 +77,7 @@ The index file contains all the tree objects staged in the file directory. Whene
 * `git mv <oldfilename> <newFilename>` renames any tracked file
 * `git log --graph --decorated` shows the git history in graph format
 
-#### Remotes
+### Remotes
 
 * `git remote -v`  showing your remotes repositories
 * `git remote show <name>` detail metadata of remote repo
@@ -88,13 +88,13 @@ The index file contains all the tree objects staged in the file directory. Whene
 * `git fetch <name>` Downloads the remote repo without downloading
 * `git push <RemoteName> <BranchName>` Uploads your local branch data to the remote branch. You must have write access
 
-#### Undoing
+### Undoing
 
 * `git commit --amend` allows you add missing files to your commit or modified the commit message
 * `git reset HEAD <filename>` unstages a file
 * `git checkout --<filename>` discard changes
 
-#### Tagging
+### Tagging
 
 * `git tag <tagName>` creates a lighweight tag reference
 * `git tag -a <tagName> -m “message”` creates an annotated tag object
@@ -103,7 +103,7 @@ The index file contains all the tree objects staged in the file directory. Whene
 * `git push origin <tagName> or —tags` uploads the tags to your remote repo
 * `git tag -d <tagName>` deletes a tag on your local repository
 
-#### Branching
+### Branching
 
 * `git branch <branchName>` creates a new branch (or new pointer that allows you to move around)
 (The "HEAD" pointer indicates the branch you are currently on)
@@ -121,10 +121,12 @@ The index file contains all the tree objects staged in the file directory. Whene
 * `git rebase --onto <Master> <topicoNE> <topicTwo>` rebasing the topicTwo branch to the Master branch
 * `git pull --rebase` Attempts to fix rebases that other people have based their work on
 
-#### Advanced Tools In GIT
-(UNDER DEVELOPMENT - To be updated soon @KerviRamos)
-
 ## REFERENCES
 1. [Pro Git by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2) Pro Git contains all the information you need to learn Git. A lot of the material derived in this repository comes from reading Pro Git and my personal experience using git.
 
 2. [Oh dangit, Git!?! by Katie Sylor-Miller](https://dangitgit.com/en) Great blog/site outlining ways to get out of bad situations in git. If you have some issues while using git, this blog will save your life.
+
+## CONTRIBUTIONS
+The "EnviroDynamicsLab" encourage people to contribute to this resource. In case of any issue you find in the documentation or content, please feel free to submit an issue request. More importantly, if you would like to contribute to this resource with the goal to make the documentation better to the community of git users, please feel free to submit a pull request with your suggestions. 
+Thanks!
+[Kervi](https://github.com/KerviRamos)
