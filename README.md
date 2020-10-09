@@ -1,5 +1,8 @@
 # GIT - Version Control System
-Git is a "content addressable filesystem" with a version control interface. Primarily, Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. The sections below outlines all the files available in this repository, attempt to explain Git's data model, and list git's frequently used commands for version management.
+
+ Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. Git takes snapshots of the files timeline and the software allows users to retrieve previous version of the file. The software provides users with the flexibility to retrieve any version of the file at anytime.
+
+The sections below outlines all the files available in this repository, attempt to explain Git's data model, and list git's frequently used commands for version management.
 
 ### Summary of resources
 The following resources can be found in this repository folder structure
@@ -16,7 +19,7 @@ The following resources can be found in this repository folder structure
 
 ## Git Data Model - Content-Addressable Filesystem Structure
 
-In order to understand how the "git" data model works, we must dive into the ".git" file directory. ".git" is a database responsible for storaging and tracking changes to the files under version control. Every time we initialize a "git" repository using the porcelain command `git init`, Git automatically creates a hidden directory called ".git". Inside the ".git", we can find the object and refs directories and the HEAD and index files. These four files form the core of  git's version control capabilities. Below, we ouline the sub-directories present in the ".git" directory and their definition.
+In order to understand how the "git" data model works, we must dive into the ".git" file directory. ".git" hidden file is the database responsible for storaging and tracking changes to the files under version control. Every time we initializes a "git" repository using the porcelain command `git init`, Git automatically creates a hidden directory called ".git". Inside the ".git", we can find the object, refs directories, HEAD, and index files. These four files form the core of  git's version control capabilities. Below, we ouline the sub-directories present in the ".git" directory and their definition.
 
   - description - file used by the GitWeb program
   - config - project specific configuration options
@@ -50,16 +53,16 @@ Git stores three main objects in order to recall a snapshot form your file syste
   <img src="png/objects.png" width = 500>
 </p>
 
-The "blob" object is responsible for storaging the content present inside the files only. The blob object will consist of the created content inside the file(s) and its associated SHA1 hash key. The blob oject does not store the file name where the content live, instead the tree object is responsible for storaging the file name associted with the content. A "tree" object allows git to store the filename of the content, and also allows the user to store a group of files together. "Tree" objects are created from "blob" objects. In the same way content is stored in a file. The "commit" object references the "tree" object and the associated blob objects. The "commit" object allows users to append additional information about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. The commit object allows users to recall a snapshot throught a single object, "commit" object, instead of remembering the SHA1 hassh value for the tree and blob objects to recall the snapshot.
+The "blob" object stores the content present inside the files only. The blob object will consist of the created content inside the file(s) and its associated SHA1 hash key. The blob oject does not store the file name where the content live, instead the tree object is responsible for storaging the file name associted with the content. A "tree" object allows git to store the filename of the content, and also allows the user to store a group of files together. "Tree" objects are created from "blob" objects. Similar to how content is stored in a file. The "commit" object references the "tree" object and the associated blob objects. The "commit" object allows users to append additional information about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. The commit object allows users to recall a snapshot throught a single object, "commit" object, instead of remembering the SHA1 hassh value for the tree and blob objects to recall the snapshot.
 
 ### refs/
-The git reference directory stores the entire "commit" object history. Instead of remembering the SHA-1 value to display the commit object history, the refs/head file is used to reference the objects history using a reference names such as branches.
+The git reference directory stores the entire "commit" object history. Instead of remembering the SHA-1 value, the refs/head file references the objects history using a reference names such as branches.
 
 ### HEAD
-The "HEAD" file is a symbolic reference that allows you know your current location along the git commit history. The HEAD looks from the current location back to previous commits along the git commit history. 
+The "HEAD" file is a symbolic reference that allows you to know your current location along the git commit history.
 
 ### index
-The index file warehouse all of the staged files (or tree objects) ready to be included in the next commit call. Whenever the user makes a commit, git gathers the staged information (tree objects < blob object) and save them in index file.
+The index file stores the staged information.
 
 ## Git Commands - Version Control Interface
 
@@ -126,7 +129,3 @@ The index file warehouse all of the staged files (or tree objects) ready to be i
 
 2. [Oh dangit, Git!?! by Katie Sylor-Miller](https://dangitgit.com/en) Great blog/site outlining ways to get out of bad situations in git. If you have some issues while using git, this blog will save your life.
 
-## CONTRIBUTIONS
-The "EnviroDynamicsLab" encourage people to contribute to this resource. In case of any issue you find in the documentation or content, please feel free to submit an issue request. More importantly, if you would like to contribute to this resource with the goal to make the documentation better to the community of git users, please feel free to submit a pull request with your suggestions. 
-Thanks!
-[Kervi](https://github.com/KerviRamos)
