@@ -1,8 +1,8 @@
 # GIT - Version Control System
 
- Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. Git takes snapshots of the files timeline and the software allows users to retrieve previous version of the file. The software provides users with the flexibility to retrieve any version of the file at anytime.
+ Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. The software, Git, let users retrieve previous versions offiles  at anytime.
 
-The sections below outlines all the files available in this repository, attempt to explain Git's data model, and list git's frequently used commands for version management.
+The sections below summarizes the directories available in this repository.
 
 ### Summary of resources
 The following resources can be found in this repository folder structure
@@ -17,9 +17,9 @@ The following resources can be found in this repository folder structure
     |- pngs/               # Reference images
 
 
-## Git Data Model - Content-Addressable Filesystem Structure
+## Git's Data Model - Content-Addressable Filesystem Structure
 
-In order to understand how the "git" data model works, we must dive into the ".git" file directory. ".git" hidden file is the database responsible for storaging and tracking changes to the files under version control. Every time we initializes a "git" repository using the porcelain command `git init`, Git automatically creates a hidden directory called ".git". Inside the ".git", we can find the object, refs directories, HEAD, and index files. These four files form the core of  git's version control capabilities. Below, we ouline the sub-directories present in the ".git" directory and their definition.
+In order to understand the "git's" data model, we must dive into the ".git" file directory. Inside the ".git", we can find the object, refs directories, HEAD, and index files. These four files form the core of git's version control capabilities.".git" is the database responsible for storaging and tracking changes to the files. Below, we ouline the sub-directories present in the ".git" directory and their definition.
 
   - description - file used by the GitWeb program
   - config - project specific configuration options
@@ -47,13 +47,14 @@ Git stores its data in a key-value data struture, and it's saved in the objects 
 
 If would like to further understand how the SHA1 hash get generated, see the [Object Storage section](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects).
 
-Git stores three main objects in order to recall a snapshot form your file system at any point in time. These three objects are the blob, tree, and commit objects and such of objects are outlined in the image below.
+Git stores three main objects in order to recall a snapshot from your file system at any point in time. These three objects are the blob, tree, and commit objects and such of objects are outlined in the image below.
 
 <p align="center">
   <img src="png/objects.png" width = 500>
 </p>
 
-The "blob" object stores the content present inside the files only. The blob object will consist of the created content inside the file(s) and its associated SHA1 hash key. The blob oject does not store the file name where the content live, instead the tree object is responsible for storaging the file name associted with the content. A "tree" object allows git to store the filename of the content, and also allows the user to store a group of files together. "Tree" objects are created from "blob" objects. Similar to how content is stored in a file. The "commit" object references the "tree" object and the associated blob objects. The "commit" object allows users to append additional information about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. The commit object allows users to recall a snapshot throught a single object, "commit" object, instead of remembering the SHA1 hassh value for the tree and blob objects to recall the snapshot.
+The "blob" object stores the content present inside the files only. The blob object will consist of the created content inside the file(s), and its associated SHA1 hash key. The blob oject doesn't store the file name where the content live, instead, the tree object is responsible for storaging the file name associted with the content. A "tree" object allows git to store the filename of the content, and also allows the user to store a group of files together. 
+The "commit" object references the "tree" object and the associated blob objects. The "commit" object permits users to append additional metadata about the stored snapshot. The "commit" object appends the author and committer information, the date and time of the commit, and a description of the commit. Once the user creates a commit object, git allows users to recall any commit snapshot throught the "commit" object, instead of the 16 digit SHA1 hash value. 
 
 ### refs/
 The git reference directory stores the entire "commit" object history. Instead of remembering the SHA-1 value, the refs/head file references the objects history using a reference names such as branches.
