@@ -1,6 +1,6 @@
 # GIT - Version Control System
 
- Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. The software, Git, let users retrieve previous versions offiles  at anytime.
+ Git is known for allowing its users to collaborate in large projects, and for keeping track of any files. The software, Git, serves as a tool to retrieve previous versions of files at anytime along the project's lifetime.
 
 The sections below summarizes the directories available in this repository.
 
